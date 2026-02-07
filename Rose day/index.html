@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day Isha 🌹</title>
+
+<style>
+html{ scroll-behavior:smooth; }
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#ff4b7d,#ff9a9e);
+    color:white;
+    text-align:center;
+    overflow-y:auto;
+}
+
+/* LOCK SCREEN */
+#lock{
+    position:fixed; inset:0;
+    display:flex; justify-content:center; align-items:center;
+    background:linear-gradient(135deg,#ff4b7d,#ff9a9e);
+    z-index:20;
+}
+.box{
+    background:rgba(255,255,255,0.2);
+    padding:30px; border-radius:20px;
+}
+input,button{
+    padding:10px 20px; border:none; border-radius:20px;
+}
+button{ background:#ff1e56; color:white; cursor:pointer; }
+
+/* CONTENT */
+header{
+    padding:20px;
+    background:rgba(0,0,0,0.25);
+}
+main{
+    display:none;
+    padding:30px;
+    position:relative;
+}
+.card{
+    background:rgba(255,255,255,0.2);
+    max-width:560px;
+    margin:auto;
+    padding:30px;
+    border-radius:25px;
+    position:relative;
+    z-index:5;
+}
+.photos{
+    display:flex; justify-content:space-around;
+}
+.photos img{
+    width:120px; height:120px;
+    border-radius:50%;
+    border:4px solid white;
+    object-fit:cover;
+}
+.gallery{
+    display:flex; gap:10px; margin-top:20px;
+}
+.gallery img{
+    width:30%; border-radius:15px;
+}
+
+/* GLOWING TYPING TEXT */
+#typing{
+    min-height:120px;
+    margin-top:15px;
+    font-size:1.15rem;
+    line-height:1.6;
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.6),
+        0 0 14px rgba(255,105,180,0.7);
+}
+
+/* FLOATING ROSES & HEARTS (TOP MAIN SCREEN) */
+.float{
+    position:absolute;
+    top:-40px;
+    font-size:22px;
+    animation:fall 7s linear infinite;
+    z-index:1;
+    opacity:0.95;
+}
+@keyframes fall{
+    from{ transform:translateY(0); opacity:1; }
+    to{ transform:translateY(120vh); opacity:0; }
+}
+
+/* MUSIC CONTROLS */
+#musicPanel{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:rgba(0,0,0,0.35);
+    padding:14px;
+    border-radius:20px;
+    z-index:50;
+}
+#musicPanel button{
+    margin-bottom:8px;
+}
+#songName{
+    font-size:0.9rem;
+    margin-bottom:6px;
+    opacity:0.95;
+}
+#volume{
+    width:140px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="lock">
+    <div class="box">
+        <h2>🔒 Enter Password</h2>
+        <input type="password" id="p" placeholder="Password">
+        <br><br>
+        <button onclick="openSite()">Enter 🌹</button>
+        <p id="err"></p>
+    </div>
+</div>
+
+<header>
+    <h1>🌹 Happy Rose Day 🌹</h1>
+</header>
+
+<main id="site">
+    <div class="card">
+
+        <div class="photos">
+            <img src="images/me.jpg">
+            <img src="images/isha.jpg">
+        </div>
+
+        <h2>Isha ❤️</h2>
+
+        <p id="typing"></p>
+
+        <div class="gallery">
+            <img src="images/us1.jpg">
+            <img src="images/us2.jpg">
+            <img src="images/us3.jpg">
+        </div>
+
+        <br>
+        <button onclick="go()">Next 💍</button>
+    </div>
+</main>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="music/deewane.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MUSIC PANEL -->
+<div id="musicPanel">
+    <div id="songName">🎵 Deewane – Navaan Sandhu</div>
+    <button onclick="playMusic()">▶ Play</button><br>
+    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.7"
+           oninput="setVolume(this.value)">
+</div>
+
+<script>
+function openSite(){
+    if(p.value==="japish"){
+        lock.style.display="none";
+        site.style.display="block";
+        typeText();
+        startFloating();
+    } else err.innerText="Wrong password 💔";
+}
+
+/* TYPING MESSAGE */
+const msg =
+"Happy Rose Day, my love Isha 🌹\n\n"+
+"Just like a rose, you’ve filled my life with beauty, fragrance, and meaning.\n\n"+
+"Every day with you feels special, but today I just want to remind you how deeply I adore you. ❤️";
+
+let i=0;
+function typeText(){
+    if(i<msg.length){
+        typing.innerHTML += msg[i]=="\n" ? "<br>" : msg[i];
+        i++;
+        setTimeout(typeText,60);
+    }
+}
+
+/* MUSIC CONTROLS */
+const music = document.getElementById("bgMusic");
+function playMusic(){
+    music.play();
+}
+function setVolume(v){
+    music.volume = v;
+}
+
+/* FLOATING ROSES & HEARTS */
+function startFloating(){
+    setInterval(()=>{
+        let f=document.createElement("div");
+        f.className="float";
+        f.innerHTML = Math.random()>0.5 ? "🌹" : "💕";
+        f.style.left = Math.random()*100 + "vw";
+        site.appendChild(f);
+        setTimeout(()=>f.remove(),7000);
+    },300);
+}
+
+function go(){
+    window.location.href="proposal.html";
+}
+</script>
+
+</body>
+</html>
