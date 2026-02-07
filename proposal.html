@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Isha ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    color:white;
+    text-align:center;
+    overflow:hidden;
+}
+.card{
+    background:rgba(255,255,255,0.2);
+    padding:40px;
+    border-radius:25px;
+    max-width:520px;
+    margin:100px auto;
+}
+button{
+    padding:14px 35px;
+    border:none;
+    border-radius:30px;
+    background:#ff1e56;
+    color:white;
+    font-size:1.1rem;
+    cursor:pointer;
+    margin:10px;
+}
+button.no{
+    background:#555;
+}
+#response{
+    margin-top:20px;
+    font-size:1.2rem;
+}
+
+/* FIREWORKS */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:boom 1s ease-out forwards;
+}
+@keyframes boom{
+    to{
+        transform:translate(var(--x),var(--y));
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Isha 💍</h1>
+    <p>
+        From today, tomorrow, and forever…  
+        will you always be mine? ❤️
+    </p>
+
+    <button onclick="yes()">Yes 💕</button>
+    <button class="no" onclick="no()">No 😢</button>
+
+    <p id="response"></p>
+</div>
+
+<script>
+function yes(){
+    for(let i=0;i<60;i++){
+        let f=document.createElement("div");
+        f.className="firework";
+        f.style.left="50%";
+        f.style.top="50%";
+        f.style.setProperty("--x",(Math.random()*400-200)+"px");
+        f.style.setProperty("--y",(Math.random()*400-200)+"px");
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    }
+    setTimeout(()=>{
+        window.location.href="forever.html";
+    },1200);
+}
+
+function no(){
+    response.innerHTML="It’s okay 💛 I respect your feelings and wish you happiness 🌸";
+}
+</script>
+
+</body>
+</html>
